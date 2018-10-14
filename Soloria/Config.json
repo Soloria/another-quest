@@ -1,0 +1,18 @@
+﻿{
+  "login": {
+    "username": "",
+    "password": ""
+  },
+
+  "data": {
+    "vin": "WAUZZZ8T4BA037241",
+    "mark": "Audi",
+    "model": "A5",
+    "manufacturing_date": "2010",
+    "number_plate": "Р904МХ178",
+    "series": "78УН",
+    "number": "267461",
+    "receiving_date": "01.11.2010",
+    "engine_power": "211" 
+  }
+}
