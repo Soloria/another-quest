@@ -4,6 +4,7 @@
     using System.IO;
     using System.Reflection;
     using Microsoft.Extensions.Configuration;
+    using System.ComponentModel;
 
     public static class Config
     {
@@ -27,34 +28,9 @@
 
         internal static T ProcessTypes<T>(string value)
         {
-            switch (typeof(T))
-            {
-                case Type t when t == typeof(Guid):
-                    return (T) (Guid.Parse(value) as object);
-                case Type t when t == typeof(bool):
-                    return (T) (bool.Parse(value) as object);
-                case Type t when t == typeof(bool?):
-                    return (T) (new bool?(bool.Parse(value)) as object);
-                case Type t when t == typeof(DateTime):
-                    return (T) (DateTime.Parse(value) as object);
-                case Type t when t == typeof(long):
-                    return (T) (long.Parse(value) as object);
-                case Type t when t == typeof(int):
-                    return (T) (int.Parse(value) as object);
-                case Type t when t == typeof(short):
-                    return (T) (short.Parse(value) as object);
-                case Type t when t == typeof(float):
-                    return (T) (float.Parse(value) as object);
-                case Type t when t == typeof(double):
-                    return (T) (double.Parse(value) as object);
-                case Type t when t == typeof(decimal):
-                    return (T) (decimal.Parse(value) as object);
-                case Type t when t == typeof(string):
-                    return (T) (object) value;
-                case Type t when t == typeof(Uri):
-                    return (T) (new Uri(value) as object);
-            }
-            throw new Exception("something going wrong lol");
+            if(TypeDescriptor.GetConverter(typeof(T)).CanConvertFrom(typeof(string)))
+                throw new Exception("something going wrong lol");
+            return TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
         }
     }
  }
