@@ -30,7 +30,7 @@
         {
             if(TypeDescriptor.GetConverter(typeof(T)).CanConvertFrom(typeof(string)))
                 throw new Exception("something going wrong lol");
-            return TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
+            return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
         }
     }
  }
